@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+.container{
+    display: inline-grid;
+    grid-gap: 1px;
+    
+    border-radius: 2px;
+   
+    grid-template-columns: repeat(16, auto);
+}
+
+
+
+.grid{
+    width: 15px;
+    height: 15px;
+    padding: 10px;
+    border: 3px solid #5A236C;
+    background-color: #fff;
+}
