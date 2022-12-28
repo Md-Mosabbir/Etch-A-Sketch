@@ -9,29 +9,49 @@
     <script src="static/app/app.js" defer></script>
   </head>
   <body>
-    <div class="container"></div>
-    <div class="status"><p id="colouring-status">Not Colouring</p></div>
-    
-    
+    <h1>Etch-A-Sketch</h1>
 
-    <div class="range-slider">
-      <span class="min">1</span>
-      <input type="range" name="slider" min="1" max="40" value="5" step="1" id="input">
-      <span class="max">5</span>
+    <div class="main">
+
+
+
+      <div class="elements">
+        <div class="container"></div>
+      </div>
+      
+      
+    
+      <div class="elements AllButtons-and-slider-picker">
+
+        <div class="status"><p id="colouring-status">Not Colouring</p></div>
+        <div class="colourPicker">
+          <input type="color" name="colorPicker" id="colourPicker" value="#000000" onclick="changeColor('draw')"     >
+        </div>
+
+
+        <div class="range-slider">
+          <span class="min">1</span>
+          <input type="range" name="slider" min="1" max="40" value="5" step="1" id="input">
+          <span class="max">5</span>
+        </div>
+
+
+        
+          
+          <button class="Toggling-grid-border" onclick="ShowGridBorder()">Grid</button>
+          <button class="reset" onclick="reset()">Reset</button>
+          <button onclick="changeColor('random')">Random</button>
+          <button onclick="changeColor('gray')">Gray</button>
+          <button onclick="changeColor('white')">Eraser</button>
+        </div>
+
+        
+      </div>
+
+     
+    
+    
     </div>
-
-
-    <div class="colourPicker">
-      <input type="color" name="colorPicker" id="colourPicker" value="#000000" oninput="changeColor('input')"     >
-    </div>
-    <button onclick="changeColor('draw')">Draw</button>
-    <button class="Toggling-grid-border" onclick="ShowGridBorder()">Toggle Grid Border</button>
-    <button class="reset" onclick="reset()">Reset</button>
-    <button onclick="changeColor('random')">Random</button>
-    <button onclick="changeColor('gray')">Gray</button>
-    <button onclick="changeColor('white')">Eraser</button>
     
-    
-
   </body>
 </html>

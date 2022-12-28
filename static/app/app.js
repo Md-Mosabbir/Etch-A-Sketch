@@ -1,4 +1,4 @@
-let color;
+let color = "black";
 let click = true;
 
 let colouringStatus = document.getElementById("colouring-status");
@@ -14,11 +14,13 @@ document.querySelector('body').addEventListener('click', (e) =>{
         if(!click){
             colouringStatus.textContent = "Colouring"
             document.querySelector('body').style.cursor = "pointer"
+            colouringStatus.style.backgroundColor = "green";
 
 
         }
         else{
             colouringStatus.textContent = "Not Colouring"
+            colouringStatus.style.backgroundColor = "red";
             document.querySelector('body').style.cursor = "default"
         }
         
@@ -68,6 +70,8 @@ function BoardFormation(size){
 
 
 
+
+
 function PickedColour(){
     if(!click){
 
@@ -83,11 +87,16 @@ function PickedColour(){
         else if(color == 'draw'){
             let ColourPicker =  document.querySelector('input[type=color]')
             this.style.backgroundColor = ColourPicker.value;
+            
+            
         }
         else if(color == 'gray'){
             let RandomNumber = Math.floor(Math.random()* 255);
             this.style.backgroundColor = `rgb(${RandomNumber},${RandomNumber},${RandomNumber})`;
 
+        }
+        else if(color == 'black'){
+            this.style.backgroundColor = "black";
         }
 
 
@@ -148,7 +157,7 @@ function ShowGridBorder(){
 
 
 const sliderValue = document.querySelector(".max");
-const inputSldier = document.querySelector("input");
+const inputSldier = document.querySelector("input[type=range]");
 
 
 
