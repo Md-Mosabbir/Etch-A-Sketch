@@ -1,39 +1,178 @@
-//Getting Container, fixed and random button---------
-let Container = document.querySelector(".container")
-let fixedColours = document.querySelector(".fixed-colour")
-let RandomColours = document.querySelector(".random-colour")
+let color;
+let click = true;
 
-//Forming the grid*------------------------------
-for(x=0; x<256;x++) {
-    let board = document.createElement('div');
-    board.className = "grid";
+let colouringStatus = document.getElementById("colouring-status");
 
-    Container.appendChild(board);
-}
-
-//------------------------------------------------------
+//-----------Drawing and Not Drawing-------------------------------------\\
 
 
-//Random Colour---------------------
-let randomWarmColour = ["#FD841F","#E14D2A","#CD104D","#9C2C77","#9A1663","#FF5858"]
+document.querySelector('body').addEventListener('click', (e) =>{
 
-function randomisingColour(randomWarmColour){
-    return randomWarmColour[Math.floor(Math.random()*randomWarmColour.length)];
+    if(e.target.tagName != 'INPUT' && e.target.tagName != 'BUTTON'){
+        click = !click;
+        
+        if(!click){
+            colouringStatus.textContent = "Colouring"
+            document.querySelector('body').style.cursor = "pointer"
+
+
+        }
+        else{
+            colouringStatus.textContent = "Not Colouring"
+            document.querySelector('body').style.cursor = "default"
+        }
+        
+    }
     
+    
+})
+
+
+//---------------------Making the Board------------------
+
+
+
+function BoardFormation(size){
+    
+    
+    let Container = document.querySelector(".container");
+    let cellsExistance = Container.querySelectorAll("div");
+    cellsExistance.forEach((div) => div.remove()); 
+
+
+    Container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    Container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+
+    let amount = size * size;
+    
+
+    for (let i = 0; i<amount; i++){
+
+        let Cell = document.createElement("div");
+        Cell.addEventListener('mouseenter', PickedColour);
+        Cell.classList.add("grid-border-show");
+        Container.appendChild(Cell);
+
+
+
+    
+    }
+
+
+
 }
-//----------------------------------------------
-
-
-//--------------------------------------------- Activating random colour---------------
-let gridEvent = document.querySelectorAll(".grid");
+//----------Colour Picker--------------------\\
 
 
 
-RandomColours.addEventListener('click', function activateRandomColours(){
 
-  gridEvent.forEach(grid => {
-    grid.addEventListener('mouseover', () => grid.style.backgroundColor = randomisingColour(randomWarmColour));
-  });
-  
+
+function PickedColour(){
+    if(!click){
+
+
+
+        if(color == 'random'){
+            this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50% )`
+    
+        }
+        else if(color == 'white'){
+            this.style.backgroundColor = "white";
+        }
+        else if(color == 'draw'){
+            let ColourPicker =  document.querySelector('input[type=color]')
+            this.style.backgroundColor = ColourPicker.value;
+        }
+        else if(color == 'gray'){
+            let RandomNumber = Math.floor(Math.random()* 255);
+            this.style.backgroundColor = `rgb(${RandomNumber},${RandomNumber},${RandomNumber})`;
+
+        }
+
+
+    }
+
+
+
+
+}
+
+function changeColor(choice){
+    color = choice;
+}
+
+
+
+    
+
+//--------Reset BUtton----------------------------\\
+
+
+function reset(){
+    let Container = document.querySelector(".container");
+    let cellsExistance = Container.querySelectorAll("div");
+    cellsExistance.forEach((div) => div.style.backgroundColor = "white"); 
+}
+
+//------------------------------------------------------\\
+
+
+
+
+BoardFormation(5);
+
+
+
+
+
+// Toggling grid border ------------------------------\\
+
+
+
+
+
+function ShowGridBorder(){
+    let Container = document.querySelector(".container");
+    let cellsExistance = Container.querySelectorAll("div");
+    cellsExistance.forEach((div) => div.classList.toggle("grid-border-show"));
+
+}
+
+
+
+
+//------------------------------------------------------------\\
+
+//------Slider-------------------------------------------\\
+
+
+const sliderValue = document.querySelector(".max");
+const inputSldier = document.querySelector("input");
+
+
+
+inputSldier.oninput = (() => {
+    let value = inputSldier.value;
+    sliderValue.textContent = value;
+    sliderValue.style.left = (value/2) + "%";
+    BoardFormation(value);
 });
-//-------------------------------------------------------------
+
+
+//-----------------------------------------------------------\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
